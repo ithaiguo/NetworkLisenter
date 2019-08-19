@@ -73,31 +73,36 @@ public class NetStateReflectReciver extends BroadcastReceiver{
 
     public void register(Object object){
 
-        Class<?> clazz = object.getClass();
-        Method[] methods = clazz.getDeclaredMethods();
+        if (networkMap.get(object) == null){
 
-        List<MethodManage> methodList = new ArrayList<>();
-        networkMap.put(object,methodList);
 
-//        Log.e("ppp", "register: "+methods.length );
-        for (Method method: methods){
-//            Log.e("ppp", "register: "+method.getName());
-            Annotation[] annotations = method.getAnnotations();
 
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            if (parameterTypes.length == 0){
-//                Class<?> clzz = parameterTypes[0];
-                for (Annotation annotation:annotations){
-                    if (annotation.annotationType() == NetworkSubscribe.class){
-                        NetworkSubscribe networkSubscribe = (NetworkSubscribe) annotation;
-                        NetType annotationNettype = networkSubscribe.nettype();
-                        MethodManage methodManage = new MethodManage(method,annotationNettype);
+            Class<?> clazz = object.getClass();
+            Method[] methods = clazz.getDeclaredMethods();
 
-                        methodList.add(methodManage);
+            List<MethodManage> methodList = new ArrayList<>();
+            networkMap.put(object,methodList);
+
+    //        Log.e("ppp", "register: "+methods.length );
+            for (Method method: methods){
+    //            Log.e("ppp", "register: "+method.getName());
+                Annotation[] annotations = method.getAnnotations();
+
+                Class<?>[] parameterTypes = method.getParameterTypes();
+                if (parameterTypes.length == 0){
+    //                Class<?> clzz = parameterTypes[0];
+                    for (Annotation annotation:annotations){
+                        if (annotation.annotationType() == NetworkSubscribe.class){
+                            NetworkSubscribe networkSubscribe = (NetworkSubscribe) annotation;
+                            NetType annotationNettype = networkSubscribe.nettype();
+                            MethodManage methodManage = new MethodManage(method,annotationNettype);
+
+                            methodList.add(methodManage);
+                        }
                     }
                 }
-            }
 
+            }
         }
 
 

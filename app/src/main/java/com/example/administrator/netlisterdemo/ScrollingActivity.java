@@ -74,13 +74,13 @@ public class ScrollingActivity extends AppCompatActivity implements NetworkListe
 
     @NetworkSubscribe
     public void testNoneNetwork(){
-//        Toast.makeText(this,"无网络",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"无网络",Toast.LENGTH_SHORT).show();
         Log.e("ppp", "testNoneNetwork: 无网络");
     }
 
     @NetworkSubscribe(nettype = NetType.WIFI)
     public void  testWifiNetwork(){
-//        Toast.makeText(this,"wifi网络",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"wifi网络",Toast.LENGTH_SHORT).show();
         Log.e("ppp", "testWifiNetwork: wifi连接" );
     }
 }
