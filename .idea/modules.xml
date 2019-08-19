@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NetListerDemo.iml" filepath="$PROJECT_DIR$/NetListerDemo.iml" />
+      <module fileurl="file://E:\AndroidGithub\NetworkLisenter\NetListerDemo.iml" filepath="E:\AndroidGithub\NetworkLisenter\NetListerDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NetworkLisenter.iml" filepath="$PROJECT_DIR$/NetworkLisenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

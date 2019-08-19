@@ -11,13 +11,17 @@ import java.lang.reflect.Method;
 public class MethodManage {
     private Method method;
 
-    private Class<?> clazz;
+//    private Class<?> clazz;
     private NetType netType;
 
-    public MethodManage(Method method, Class<?> clazz, NetType netType) {
+    public MethodManage(Method method, NetType netType) {
         this.method = method;
-        this.clazz = clazz;
+//        this.clazz = clazz;
         this.netType = netType;
+    }
+
+    public void invoekMethod(){
+//        method.invoke()
     }
 
     public Method getMethod() {
@@ -28,13 +32,13 @@ public class MethodManage {
         this.method = method;
     }
 
-    public Class<?> getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Class<?> clazz) {
-        this.clazz = clazz;
-    }
+//    public Class<?> getClazz() {
+//        return clazz;
+//    }
+//
+//    public void setClazz(Class<?> clazz) {
+//        this.clazz = clazz;
+//    }
 
     public NetType getNetType() {
         return netType;

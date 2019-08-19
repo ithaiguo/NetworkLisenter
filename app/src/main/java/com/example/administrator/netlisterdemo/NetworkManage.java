@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.IntentFilter;
 
+import com.example.administrator.netlisterdemo.annotation.NetStateReflectReciver;
+
 /**
  * Created by Administrator on 2019/8/15.
  */
@@ -13,6 +15,7 @@ public class NetworkManage {
     private static NetworkManage networkManage;
     private Application application;
     private NetStateReciver netStateReciver;
+
 
 
     private NetworkManage(){
@@ -44,14 +47,39 @@ public class NetworkManage {
 
     public void init(Application application){
         this.application = application;
-        register();
+//        initreciver();
+        initreciverannotation();
     }
 
-    public void register(){
+    public void initreciver(){
         netStateReciver = new NetStateReciver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Contanst.NET_ACTION);
         application.registerReceiver(netStateReciver,intentFilter);
     }
 
+
+    /***
+     * 反射注解方法
+     * 分割线 =================================================================================
+     */
+    private NetStateReflectReciver netStateReflectReciver;
+    public void initreciverannotation() {
+        netStateReflectReciver = new NetStateReflectReciver();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Contanst.NET_ACTION);
+        application.registerReceiver(netStateReflectReciver,intentFilter);
+    }
+
+    public void register(Object object) {
+        netStateReflectReciver.register(object);
+    }
+
+    public void unregister(Object object) {
+        if (netStateReflectReciver!=null){
+            application.unregisterReceiver(netStateReflectReciver);
+            netStateReflectReciver.unregister(object);
+        }
+    }
 }

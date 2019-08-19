@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.example.administrator.netlisterdemo.annotation.Network;
+import com.example.administrator.netlisterdemo.annotation.MethodManage;
+import com.example.administrator.netlisterdemo.annotation.NetworkSubscribe;
 
 public class ScrollingActivity extends AppCompatActivity implements NetworkListener {
 
@@ -36,7 +36,8 @@ public class ScrollingActivity extends AppCompatActivity implements NetworkListe
 //        registerNetReciver();
 //        initNetmanage();
 
-        NetworkManage.getDefault().setListener(this);
+//        NetworkManage.getDefault().setListener(this);
+        NetworkManage.getDefault().register(this);
 
     }
 
@@ -56,6 +57,8 @@ public class ScrollingActivity extends AppCompatActivity implements NetworkListe
     protected void onDestroy() {
         super.onDestroy();
 //        unregisterReceiver(netStateReciver);
+
+        NetworkManage.getDefault().unregister(this);
     }
 
     @Override
@@ -69,8 +72,15 @@ public class ScrollingActivity extends AppCompatActivity implements NetworkListe
     }
 
 
-    @Network
-    public void testNetwork(){
+    @NetworkSubscribe
+    public void testNoneNetwork(){
+//        Toast.makeText(this,"无网络",Toast.LENGTH_SHORT).show();
+        Log.e("ppp", "testNoneNetwork: 无网络");
+    }
 
+    @NetworkSubscribe(nettype = NetType.WIFI)
+    public void  testWifiNetwork(){
+//        Toast.makeText(this,"wifi网络",Toast.LENGTH_SHORT).show();
+        Log.e("ppp", "testWifiNetwork: wifi连接" );
     }
 }
